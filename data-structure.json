@@ -1,0 +1,81 @@
+{
+  // Meta info
+  // All the groups created on the app by of all the users
+  "groups": {
+    "one": {
+      "title": "Notre voyage en Grèce",
+      "total": 120000,
+      "currency": "€",
+      "timestamp": 1459361875666
+    },
+    "two": { ... },
+    "three": { ...},
+  },
+  // Key = userId, Value always 'true'.
+  // i.e. consider that any user listed is a member of the group
+  // Groups members easily accessible
+  // And stored by group ID
+  // Depending on what we want, this can be replaced by : groups/$group_id/members/$user_id
+  "members": {
+    "one": {
+      "uuid-user-1": true,
+      "uuid-user-2": true
+    },
+    "two": {
+      "uuid-user-2": true,
+      "uuid-user-3": true,
+      "uuid-user-4": true,
+    },
+    "three": { ... }
+  },
+  // List of all the expenses of all the users in the app organized by group
+  // Numerous entries but easy to paginate and query them
+  "expenses": {
+    "one": {
+      "ex1": {
+        "description": "Première course Auchan",
+        "total": 6075,
+        "timestamp": 1459361875337,
+        "purchaser": "uuid-user-1",
+        "beneficiaries": {
+          "uuid-user-1": true, // The purchaser does not have to be in the beneficiaries
+          "uuid-user-2": true
+        }
+      },
+      "ex2": {
+        "description": "Boulangerie Sète",
+        "total": 350,
+        "timestamp": 1549671893459,
+        "purchaser": "uuid-user-2",
+        "beneficiaries": {
+          "uuid-user-1": true
+        }
+      },
+      "ex3": { ... },
+      "ex4": { ... }
+    },
+    "two": {
+      "ex1": { ... },
+      "ex2": { ... },
+    },
+    "three": { ... }
+  }
+},
+// We have lots of many-to-many relationship between different thing, 
+// We just need to know which point of view we choose and then, we'll know the structure of the json tree
+// Users
+{
+  "users": {
+    "uuid-user-1": {
+      "firstname": "Hugo",
+      "lastname": "Bayoud",
+      "timestamp": 1549671893460,
+      "groups": {
+        "one": true,
+        "three": true
+      },
+    },
+    "uuid-user-2": { ... },
+    "uuid-user-3": { ... }
+  },
+}
